@@ -1,0 +1,30 @@
+{
+  "name": "prg06-react-frontend",
+  "version": "1.0.0",
+  "description": "A React front-end for the webservice, built earlier in PRG06.",
+  "scripts": {
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html --dist-dir docs --public-url ./"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TzunderWulf/prg06-react-frontend.git"
+  },
+  "keywords": [
+    "React",
+    "front-end"
+  ],
+  "author": "tzunderwulf",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TzunderWulf/prg06-react-frontend/issues"
+  },
+  "homepage": "https://github.com/TzunderWulf/prg06-react-frontend#readme",
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "parcel": "^2.0.1"
+  }
+}
