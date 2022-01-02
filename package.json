@@ -4,7 +4,7 @@
   "description": "A React front-end for the webservice, built earlier in PRG06.",
   "scripts": {
     "start": "parcel src/index.html",
-    "build": "parcel build src/index.html --public-url ./"
+    "build": "parcel build src/index.html --dist-dir docs --public-url ./"
   },
   "repository": {
     "type": "git",
