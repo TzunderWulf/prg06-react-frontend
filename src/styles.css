@@ -1,0 +1,17 @@
+/* 
+font -> aliceblue: #e7ecef
+bg ->   charcoal:  #2f4550
+        cerulean:  #6096ba
+        baby-blue: #a3cef1
+pop ->  cedar che: #db504a 
+*/
+
+* {
+    font-family: 'Ubuntu Mono', monospace;
+}
+
+.block-around {
+    border: 2px solid black;
+    padding: 10px;
+    margin: 10px;
+}

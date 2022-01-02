@@ -22733,24 +22733,36 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "App", ()=>App
 );
 var _jsxRuntime = require("react/jsx-runtime");
+var _characters = require("./Characters");
 function App() {
-    return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
+    return(/*#__PURE__*/ _jsxRuntime.jsxs("div", {
         className: "app",
         __source: {
             fileName: "src/App.js",
-            lineNumber: 3,
+            lineNumber: 5,
             columnNumber: 9
         },
         __self: this,
-        children: /*#__PURE__*/ _jsxRuntime.jsx("h1", {
-            __source: {
-                fileName: "src/App.js",
-                lineNumber: 4,
-                columnNumber: 13
-            },
-            __self: this,
-            children: "The Genshin Impact Character Archive"
-        })
+        children: [
+            /*#__PURE__*/ _jsxRuntime.jsx("h1", {
+                className: "title",
+                __source: {
+                    fileName: "src/App.js",
+                    lineNumber: 6,
+                    columnNumber: 13
+                },
+                __self: this,
+                children: "The Genshin Impact Character Archive"
+            }),
+            /*#__PURE__*/ _jsxRuntime.jsx(_characters.Characters, {
+                __source: {
+                    fileName: "src/App.js",
+                    lineNumber: 7,
+                    columnNumber: 13
+                },
+                __self: this
+            })
+        ]
     }));
 }
 _c = App;
@@ -22762,7 +22774,7 @@ $RefreshReg$(_c, "App");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"6Ds2u","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9pz13"}],"ciiiV":[function(require,module,exports) {
+},{"react/jsx-runtime":"6Ds2u","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9pz13","./Characters":"9Gcbu"}],"ciiiV":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -22912,6 +22924,128 @@ function registerExportsForReactRefresh(module) {
     }
 }
 
-},{"react-refresh/runtime":"aeH4U"}]},["emU3S","lBB98","hD4hw"], "hD4hw", "parcelRequire8b2a")
+},{"react-refresh/runtime":"aeH4U"}],"9Gcbu":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$98d4 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$98d4.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Characters", ()=>Characters
+);
+var _jsxRuntime = require("react/jsx-runtime");
+var _react = require("react");
+var _character = require("./Character");
+var _s = $RefreshSig$();
+function Characters() {
+    _s();
+    const [characters, setCharacters] = _react.useState([]);
+    const loadJSON = ()=>{
+        fetch('http://145.24.222.243:8080/characters', {
+            mode: 'cors',
+            headers: {
+                'Accept': 'application/json'
+            }
+        }).then((response)=>response.json()
+        ).then((data)=>{
+            setCharacters(data.items);
+        }).catch((err)=>console.error(err)
+        );
+    };
+    const createCharacters = characters.map((item)=>{
+        return(/*#__PURE__*/ _jsxRuntime.jsx(_character.Character, {
+            name: item.name,
+            element: item.element,
+            __source: {
+                fileName: "src/Characters.js",
+                lineNumber: 23,
+                columnNumber: 17
+            },
+            __self: this
+        }, item._id));
+    });
+    _react.useEffect(loadJSON, []);
+    return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
+        className: "block-around ",
+        __source: {
+            fileName: "src/Characters.js",
+            lineNumber: 30,
+            columnNumber: 9
+        },
+        __self: this,
+        children: createCharacters
+    }));
+}
+_s(Characters, "Lpb9AbqKJ07+xuj4aZ1twNw87e0=");
+_c = Characters;
+var _c;
+$RefreshReg$(_c, "Characters");
+
+  $parcel$ReactRefreshHelpers$98d4.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-runtime":"6Ds2u","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9pz13","./Character":"jJ63R","react":"4mchR"}],"jJ63R":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$a083 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$a083.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Character", ()=>Character
+);
+var _jsxRuntime = require("react/jsx-runtime");
+function Character(props) {
+    return(/*#__PURE__*/ _jsxRuntime.jsxs("div", {
+        className: "block-around ",
+        __source: {
+            fileName: "src/Character.js",
+            lineNumber: 3,
+            columnNumber: 9
+        },
+        __self: this,
+        children: [
+            /*#__PURE__*/ _jsxRuntime.jsxs("h2", {
+                __source: {
+                    fileName: "src/Character.js",
+                    lineNumber: 4,
+                    columnNumber: 13
+                },
+                __self: this,
+                children: [
+                    "Name: ",
+                    props.name
+                ]
+            }),
+            /*#__PURE__*/ _jsxRuntime.jsxs("h2", {
+                __source: {
+                    fileName: "src/Character.js",
+                    lineNumber: 5,
+                    columnNumber: 13
+                },
+                __self: this,
+                children: [
+                    "Element: ",
+                    props.element
+                ]
+            })
+        ]
+    }));
+}
+_c = Character;
+var _c;
+$RefreshReg$(_c, "Character");
+
+  $parcel$ReactRefreshHelpers$a083.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-runtime":"6Ds2u","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9pz13"}]},["emU3S","lBB98","hD4hw"], "hD4hw", "parcelRequire8b2a")
 
 //# sourceMappingURL=index.379dd93c.js.map
