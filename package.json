@@ -22,7 +22,8 @@
   "homepage": "https://github.com/TzunderWulf/prg06-react-frontend#readme",
   "dependencies": {
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-modal": "^3.14.4"
   },
   "devDependencies": {
     "parcel": "^2.0.1"

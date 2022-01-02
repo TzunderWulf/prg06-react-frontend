@@ -1,34 +1,35 @@
-import { useState, useEffect } from 'react';
-
-import { Character } from './Character'
+import { useState, useEffect } from "react";
 
 export function Characters() {
-
     const [characters, setCharacters] = useState([]);
 
-    const loadJSON = () => {
+    const loadCharacters = () => {
         fetch('http://145.24.222.243:8080/characters', {
-            mode: 'cors',
             headers: {
                 'Accept': 'application/json'
             }
         })
-            .then(response => response.json())
-            .then(data => {setCharacters(data.items)})
-            .catch(err => console.error(err))
-    }
+        .then(response => response.json())
+        .then(data => { setCharacters(data.items) })
+        .catch(error => console.log(error))
+    };
 
-    const createCharacters = characters.map((item) => {
-            return(
-                <Character key={item._id} name={item.name} element={item.element} />
-            );
-        })
+    const listCharacters = characters.map((character) => {
+        return(
+            <div className="block-around" key={character._id}>
+                <p>{character.name}</p>
+                <button>See more</button>
+                <button>Edit {character.name}</button>
+                <button>Delete {character.name}</button>
+            </div>
+        )
+    })
 
-    useEffect(loadJSON, []);
+    useEffect(loadCharacters, []);
 
     return(
-        <div className='block-around '>
-            {createCharacters}
+        <div>
+            {listCharacters}
         </div>
-    );
+    )
 }
