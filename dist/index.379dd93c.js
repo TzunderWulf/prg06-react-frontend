@@ -23057,9 +23057,13 @@ _reactModalDefault.default.setAppElement('#app');
 function CreateCharacter() {
     _s();
     const [modalIsOpen, setIsOpen] = _react.useState(false);
-    const [characterName, setCharacterName] = _react.useState('');
-    const [characterElement, setCharacterElement] = _react.useState('');
-    const [characterRegion, setCharacterRegion] = _react.useState('');
+    const [inputs, setInputs] = _react.useState({
+        name: '',
+        region: '',
+        element: ''
+    });
+    const [error, setError] = _react.useState('');
+    let formValid = false;
     const openModal = ()=>{
         setIsOpen(true);
     };
@@ -23068,12 +23072,31 @@ function CreateCharacter() {
     const closeModal = ()=>{
         setIsOpen(false);
     };
-    const handleSubmit = ()=>{
+    const handleChangeInput = (e)=>{
+        const inputValue = e.target.value;
+        setInputs({
+            ...inputs,
+            [e.target.name]: inputValue
+        });
+    };
+    const handleSubmit = (e)=>{
+        e.preventDefault();
+        // Check if any are empty
+        if (inputs.name.trim() == "" || inputs.element.trim() == "" || inputs.region.trim() == "") setError('No fields are allowed to be empty');
+        else {
+            formValid = true;
+            setError('');
+        }
+        console.log(inputs);
+        console.log(`${error}, form valid: ${formValid}`);
+        if (formValid && error.trim() == "") // Do post request to webservice
+        // Send confirmation back
+        closeModal();
     };
     return(/*#__PURE__*/ _jsxRuntime.jsxs("div", {
         __source: {
             fileName: "src/CreateCharacter.js",
-            lineNumber: 29,
+            lineNumber: 61,
             columnNumber: 9
         },
         __self: this,
@@ -23082,7 +23105,7 @@ function CreateCharacter() {
                 onClick: openModal,
                 __source: {
                     fileName: "src/CreateCharacter.js",
-                    lineNumber: 30,
+                    lineNumber: 62,
                     columnNumber: 13
                 },
                 __self: this,
@@ -23095,7 +23118,7 @@ function CreateCharacter() {
                 contentLabel: "Create character modal",
                 __source: {
                     fileName: "src/CreateCharacter.js",
-                    lineNumber: 31,
+                    lineNumber: 63,
                     columnNumber: 9
                 },
                 __self: this,
@@ -23104,7 +23127,7 @@ function CreateCharacter() {
                         onClick: closeModal,
                         __source: {
                             fileName: "src/CreateCharacter.js",
-                            lineNumber: 37,
+                            lineNumber: 69,
                             columnNumber: 13
                         },
                         __self: this,
@@ -23113,7 +23136,7 @@ function CreateCharacter() {
                     /*#__PURE__*/ _jsxRuntime.jsx("h1", {
                         __source: {
                             fileName: "src/CreateCharacter.js",
-                            lineNumber: 38,
+                            lineNumber: 70,
                             columnNumber: 13
                         },
                         __self: this,
@@ -23122,7 +23145,7 @@ function CreateCharacter() {
                     /*#__PURE__*/ _jsxRuntime.jsxs("form", {
                         __source: {
                             fileName: "src/CreateCharacter.js",
-                            lineNumber: 39,
+                            lineNumber: 72,
                             columnNumber: 13
                         },
                         __self: this,
@@ -23130,16 +23153,16 @@ function CreateCharacter() {
                             /*#__PURE__*/ _jsxRuntime.jsxs("div", {
                                 __source: {
                                     fileName: "src/CreateCharacter.js",
-                                    lineNumber: 40,
+                                    lineNumber: 73,
                                     columnNumber: 17
                                 },
                                 __self: this,
                                 children: [
                                     /*#__PURE__*/ _jsxRuntime.jsx("label", {
-                                        htmlFor: "character-name",
+                                        htmlFor: "name",
                                         __source: {
                                             fileName: "src/CreateCharacter.js",
-                                            lineNumber: 41,
+                                            lineNumber: 74,
                                             columnNumber: 21
                                         },
                                         __self: this,
@@ -23147,14 +23170,13 @@ function CreateCharacter() {
                                     }),
                                     /*#__PURE__*/ _jsxRuntime.jsx("input", {
                                         type: "text",
-                                        name: "character-name",
+                                        name: "name",
                                         minLength: 2,
-                                        value: characterName,
-                                        onChange: (e)=>handleCharacterNameChange(e)
-                                        ,
+                                        value: inputs.name,
+                                        onChange: handleChangeInput,
                                         __source: {
                                             fileName: "src/CreateCharacter.js",
-                                            lineNumber: 42,
+                                            lineNumber: 75,
                                             columnNumber: 21
                                         },
                                         __self: this
@@ -23164,16 +23186,16 @@ function CreateCharacter() {
                             /*#__PURE__*/ _jsxRuntime.jsxs("div", {
                                 __source: {
                                     fileName: "src/CreateCharacter.js",
-                                    lineNumber: 45,
+                                    lineNumber: 78,
                                     columnNumber: 17
                                 },
                                 __self: this,
                                 children: [
                                     /*#__PURE__*/ _jsxRuntime.jsx("label", {
-                                        htmlFor: "character-element",
+                                        htmlFor: "element",
                                         __source: {
                                             fileName: "src/CreateCharacter.js",
-                                            lineNumber: 46,
+                                            lineNumber: 79,
                                             columnNumber: 21
                                         },
                                         __self: this,
@@ -23181,14 +23203,13 @@ function CreateCharacter() {
                                     }),
                                     /*#__PURE__*/ _jsxRuntime.jsx("input", {
                                         type: "text",
-                                        name: "character-element",
+                                        name: "element",
                                         minLength: 2,
-                                        value: characterElement,
-                                        onChange: (e)=>handleCharacterNameChange(e)
-                                        ,
+                                        value: inputs.element,
+                                        onChange: handleChangeInput,
                                         __source: {
                                             fileName: "src/CreateCharacter.js",
-                                            lineNumber: 47,
+                                            lineNumber: 80,
                                             columnNumber: 21
                                         },
                                         __self: this
@@ -23198,16 +23219,16 @@ function CreateCharacter() {
                             /*#__PURE__*/ _jsxRuntime.jsxs("div", {
                                 __source: {
                                     fileName: "src/CreateCharacter.js",
-                                    lineNumber: 50,
+                                    lineNumber: 83,
                                     columnNumber: 17
                                 },
                                 __self: this,
                                 children: [
                                     /*#__PURE__*/ _jsxRuntime.jsx("label", {
-                                        htmlFor: "character-region",
+                                        htmlFor: "region",
                                         __source: {
                                             fileName: "src/CreateCharacter.js",
-                                            lineNumber: 51,
+                                            lineNumber: 84,
                                             columnNumber: 21
                                         },
                                         __self: this,
@@ -23215,14 +23236,13 @@ function CreateCharacter() {
                                     }),
                                     /*#__PURE__*/ _jsxRuntime.jsx("input", {
                                         type: "text",
-                                        name: "character-region",
+                                        name: "region",
                                         minLength: 2,
-                                        value: characterRegion,
-                                        onChange: (e)=>handleCharacterNameChange(e)
-                                        ,
+                                        value: inputs.region,
+                                        onChange: handleChangeInput,
                                         __source: {
                                             fileName: "src/CreateCharacter.js",
-                                            lineNumber: 52,
+                                            lineNumber: 85,
                                             columnNumber: 21
                                         },
                                         __self: this
@@ -23235,7 +23255,7 @@ function CreateCharacter() {
                                 onClick: handleSubmit,
                                 __source: {
                                     fileName: "src/CreateCharacter.js",
-                                    lineNumber: 55,
+                                    lineNumber: 88,
                                     columnNumber: 17
                                 },
                                 __self: this
@@ -23247,7 +23267,7 @@ function CreateCharacter() {
         ]
     }));
 }
-_s(CreateCharacter, "bQhBxlyeerKUceZ1G0S7jFRGe2o=");
+_s(CreateCharacter, "8Ro5WZcY/m+Qx5SD3ywSpw644LY=");
 _c = CreateCharacter;
 var _c;
 $RefreshReg$(_c, "CreateCharacter");
@@ -23257,7 +23277,7 @@ $RefreshReg$(_c, "CreateCharacter");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"6Ds2u","react-modal":"7EW7w","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9pz13","react":"4mchR"}],"7EW7w":[function(require,module,exports) {
+},{"react/jsx-runtime":"6Ds2u","react-modal":"7EW7w","react":"4mchR","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9pz13"}],"7EW7w":[function(require,module,exports) {
 "use strict";
 Object.defineProperty(exports, "__esModule", {
     value: true
