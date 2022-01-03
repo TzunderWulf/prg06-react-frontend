@@ -22950,81 +22950,45 @@ var _s = $RefreshSig$();
 function Characters() {
     _s();
     const [characters, setCharacters] = _react.useState([]);
-    const loadCharacters = ()=>{
-        fetch('http://145.24.222.243:8080/characters', {
+    const loadInCharacters = ()=>{
+        fetch(`http://145.24.222.243:8080/characters`, {
             headers: {
-                'Accept': 'application/json'
+                "Accept": "application/json"
             }
         }).then((response)=>response.json()
-        ).then((data)=>{
-            setCharacters(data.items);
-        }).catch((error)=>console.log(error)
+        ).then((data)=>setCharacters(data.items)
+        ).catch((error)=>console.log(error)
         );
     };
-    const listCharacters = characters.map((character)=>{
-        return(/*#__PURE__*/ _jsxRuntime.jsxs("div", {
+    const listAllCharacters = characters.map((character)=>{
+        return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
             className: "block-around",
             __source: {
                 fileName: "src/Characters.js",
-                lineNumber: 19,
+                lineNumber: 20,
                 columnNumber: 13
             },
             __self: this,
-            children: [
-                /*#__PURE__*/ _jsxRuntime.jsx("p", {
-                    __source: {
-                        fileName: "src/Characters.js",
-                        lineNumber: 20,
-                        columnNumber: 17
-                    },
-                    __self: this,
-                    children: character.name
-                }),
-                /*#__PURE__*/ _jsxRuntime.jsx("button", {
-                    __source: {
-                        fileName: "src/Characters.js",
-                        lineNumber: 21,
-                        columnNumber: 17
-                    },
-                    __self: this,
-                    children: "See more"
-                }),
-                /*#__PURE__*/ _jsxRuntime.jsxs("button", {
-                    __source: {
-                        fileName: "src/Characters.js",
-                        lineNumber: 22,
-                        columnNumber: 17
-                    },
-                    __self: this,
-                    children: [
-                        "Edit ",
-                        character.name
-                    ]
-                }),
-                /*#__PURE__*/ _jsxRuntime.jsxs("button", {
-                    __source: {
-                        fileName: "src/Characters.js",
-                        lineNumber: 23,
-                        columnNumber: 17
-                    },
-                    __self: this,
-                    children: [
-                        "Delete ",
-                        character.name
-                    ]
-                })
-            ]
+            children: /*#__PURE__*/ _jsxRuntime.jsx("h1", {
+                __source: {
+                    fileName: "src/Characters.js",
+                    lineNumber: 21,
+                    columnNumber: 17
+                },
+                __self: this,
+                children: character.name
+            })
         }, character._id));
     });
-    _react.useEffect(loadCharacters, []);
+    _react.useEffect(loadInCharacters, []);
     return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
         __source: {
             fileName: "src/Characters.js",
-            lineNumber: 31,
+            lineNumber: 29,
             columnNumber: 9
         },
         __self: this,
-        children: listCharacters
+        children: listAllCharacters
     }));
 }
 _s(Characters, "Lpb9AbqKJ07+xuj4aZ1twNw87e0=");
@@ -23037,7 +23001,7 @@ $RefreshReg$(_c, "Characters");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"6Ds2u","react":"4mchR","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9pz13"}],"157lC":[function(require,module,exports) {
+},{"react/jsx-runtime":"6Ds2u","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9pz13","react":"4mchR"}],"157lC":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$d3f3 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -23063,7 +23027,6 @@ function CreateCharacter() {
         element: ''
     });
     const [error, setError] = _react.useState('');
-    let formValid = false;
     const openModal = ()=>{
         setIsOpen(true);
     };
@@ -23080,23 +23043,14 @@ function CreateCharacter() {
         });
     };
     const handleSubmit = (e)=>{
+        setError("");
         e.preventDefault();
-        // Check if any are empty
-        if (inputs.name.trim() == "" || inputs.element.trim() == "" || inputs.region.trim() == "") setError('No fields are allowed to be empty');
-        else {
-            formValid = true;
-            setError('');
-        }
-        console.log(inputs);
-        console.log(`${error}, form valid: ${formValid}`);
-        if (formValid && error.trim() == "") // Do post request to webservice
-        // Send confirmation back
-        closeModal();
+        if (inputs.name.trim() == "" || inputs.element.trim() == "" || inputs.region.trim() == "") setError("Please fill in all field.");
     };
     return(/*#__PURE__*/ _jsxRuntime.jsxs("div", {
         __source: {
             fileName: "src/CreateCharacter.js",
-            lineNumber: 61,
+            lineNumber: 45,
             columnNumber: 9
         },
         __self: this,
@@ -23105,7 +23059,7 @@ function CreateCharacter() {
                 onClick: openModal,
                 __source: {
                     fileName: "src/CreateCharacter.js",
-                    lineNumber: 62,
+                    lineNumber: 46,
                     columnNumber: 13
                 },
                 __self: this,
@@ -23118,7 +23072,7 @@ function CreateCharacter() {
                 contentLabel: "Create character modal",
                 __source: {
                     fileName: "src/CreateCharacter.js",
-                    lineNumber: 63,
+                    lineNumber: 47,
                     columnNumber: 9
                 },
                 __self: this,
@@ -23127,7 +23081,7 @@ function CreateCharacter() {
                         onClick: closeModal,
                         __source: {
                             fileName: "src/CreateCharacter.js",
-                            lineNumber: 69,
+                            lineNumber: 53,
                             columnNumber: 13
                         },
                         __self: this,
@@ -23136,16 +23090,25 @@ function CreateCharacter() {
                     /*#__PURE__*/ _jsxRuntime.jsx("h1", {
                         __source: {
                             fileName: "src/CreateCharacter.js",
-                            lineNumber: 70,
+                            lineNumber: 54,
                             columnNumber: 13
                         },
                         __self: this,
                         children: "Add new character"
                     }),
+                    error && /*#__PURE__*/ _jsxRuntime.jsx("p", {
+                        __source: {
+                            fileName: "src/CreateCharacter.js",
+                            lineNumber: 55,
+                            columnNumber: 23
+                        },
+                        __self: this,
+                        children: "Please fill in all fields."
+                    }),
                     /*#__PURE__*/ _jsxRuntime.jsxs("form", {
                         __source: {
                             fileName: "src/CreateCharacter.js",
-                            lineNumber: 72,
+                            lineNumber: 56,
                             columnNumber: 13
                         },
                         __self: this,
@@ -23153,7 +23116,7 @@ function CreateCharacter() {
                             /*#__PURE__*/ _jsxRuntime.jsxs("div", {
                                 __source: {
                                     fileName: "src/CreateCharacter.js",
-                                    lineNumber: 73,
+                                    lineNumber: 57,
                                     columnNumber: 17
                                 },
                                 __self: this,
@@ -23162,7 +23125,7 @@ function CreateCharacter() {
                                         htmlFor: "name",
                                         __source: {
                                             fileName: "src/CreateCharacter.js",
-                                            lineNumber: 74,
+                                            lineNumber: 58,
                                             columnNumber: 21
                                         },
                                         __self: this,
@@ -23176,7 +23139,7 @@ function CreateCharacter() {
                                         onChange: handleChangeInput,
                                         __source: {
                                             fileName: "src/CreateCharacter.js",
-                                            lineNumber: 75,
+                                            lineNumber: 59,
                                             columnNumber: 21
                                         },
                                         __self: this
@@ -23186,7 +23149,7 @@ function CreateCharacter() {
                             /*#__PURE__*/ _jsxRuntime.jsxs("div", {
                                 __source: {
                                     fileName: "src/CreateCharacter.js",
-                                    lineNumber: 78,
+                                    lineNumber: 62,
                                     columnNumber: 17
                                 },
                                 __self: this,
@@ -23195,7 +23158,7 @@ function CreateCharacter() {
                                         htmlFor: "element",
                                         __source: {
                                             fileName: "src/CreateCharacter.js",
-                                            lineNumber: 79,
+                                            lineNumber: 63,
                                             columnNumber: 21
                                         },
                                         __self: this,
@@ -23209,7 +23172,7 @@ function CreateCharacter() {
                                         onChange: handleChangeInput,
                                         __source: {
                                             fileName: "src/CreateCharacter.js",
-                                            lineNumber: 80,
+                                            lineNumber: 64,
                                             columnNumber: 21
                                         },
                                         __self: this
@@ -23219,7 +23182,7 @@ function CreateCharacter() {
                             /*#__PURE__*/ _jsxRuntime.jsxs("div", {
                                 __source: {
                                     fileName: "src/CreateCharacter.js",
-                                    lineNumber: 83,
+                                    lineNumber: 67,
                                     columnNumber: 17
                                 },
                                 __self: this,
@@ -23228,7 +23191,7 @@ function CreateCharacter() {
                                         htmlFor: "region",
                                         __source: {
                                             fileName: "src/CreateCharacter.js",
-                                            lineNumber: 84,
+                                            lineNumber: 68,
                                             columnNumber: 21
                                         },
                                         __self: this,
@@ -23242,7 +23205,7 @@ function CreateCharacter() {
                                         onChange: handleChangeInput,
                                         __source: {
                                             fileName: "src/CreateCharacter.js",
-                                            lineNumber: 85,
+                                            lineNumber: 69,
                                             columnNumber: 21
                                         },
                                         __self: this
@@ -23255,7 +23218,7 @@ function CreateCharacter() {
                                 onClick: handleSubmit,
                                 __source: {
                                     fileName: "src/CreateCharacter.js",
-                                    lineNumber: 88,
+                                    lineNumber: 72,
                                     columnNumber: 17
                                 },
                                 __self: this
