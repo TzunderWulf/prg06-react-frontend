@@ -11,10 +11,9 @@ export function CreateCharacter(props) {
         element: "",
         region: ""
     });
-    const [notifaction, setNotifacation] = useState(false);
 
     const openModal = () => {
-        setNotifacation(false)
+        props.setNotification("")
         setIsOpen(true);
     }
 
@@ -36,7 +35,6 @@ export function CreateCharacter(props) {
         e.preventDefault();
 
         if (inputs.name.trim() != "" && inputs.element.trim() != "" && inputs.region.trim() != "") {
-            console.log(inputs);
             fetch(`http://145.24.222.243:8080/characters`, {
                 method: "post",
                 headers: {
@@ -53,9 +51,9 @@ export function CreateCharacter(props) {
                 response.json();
                 if (response.status == 201) {
                     props.reloadCharacters();
-                    setNotifacation(`Character created! 👍`);
+                    props.setNotification(`Character created! 👍`);
                 } else {
-                    setNotifacation(`Something went wrong, please try again. 😞`);
+                    props.setNotification(`Something went wrong, please try again. 😞`);
                 }
                 closeModal();
             })
@@ -66,7 +64,6 @@ export function CreateCharacter(props) {
     return(
         <div>
             <button onClick={openModal} className="standard-button">Add character to archive</button>
-                {notifaction && <p className="notification">{notifaction}</p>}
             <Modal
                 className="modal-content"
                 isOpen={modalIsOpen} 
@@ -95,7 +92,7 @@ export function CreateCharacter(props) {
                             <label>Residing region</label>
                             <input type="text" name="region" value={inputs.region} onChange={handleChange} />
                         </div>
-                        <input className="standard-button" type="submit" value="Add character" onClick={handleSubmit} />
+                        <input className="confirm-button" type="submit" value="Add character" onClick={handleSubmit} />
                     </form>
                 </div>
             </Modal>

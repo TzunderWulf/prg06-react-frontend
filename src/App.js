@@ -7,6 +7,7 @@ export function App()
 {
 
     const [characters, setCharacters] = useState([]);
+    const [notification, setNotification] = useState("");
 
     // Fetch all characters from webservice
     const loadCharacters = () => {
@@ -26,9 +27,10 @@ export function App()
         <div>
             <div className="top-bar">
                 <h1>The Genshin Impact Character Archive</h1>
-                <CreateCharacter reloadCharacters={loadCharacters} />
+                <CreateCharacter reloadCharacters={loadCharacters} setNotification={setNotification} />
+                {notification && <p className="notification">{notification}</p>}
             </div>
-            <Characters characters={characters} reloadCharacters={loadCharacters} />
+            <Characters characters={characters} reloadCharacters={loadCharacters} setNotification={setNotification} />
         </div>
     )
 }

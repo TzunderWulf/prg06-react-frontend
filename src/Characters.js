@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { ReadCharacter } from "./ReadCharacter";
 
 export function Characters(props) {
-
     const [error, setError] = useState();
 
     const [selectedCharacter, setSelectedCharacter] = useState();
@@ -12,6 +11,10 @@ export function Characters(props) {
     const loadActiveCharacter = (data) => {
         setSelectedCharacter(data); 
     };
+
+    const resetActiveCharacter = () => {
+        setSelectedCharacter(); 
+    }
 
     const scrollToTop = () => {
         window.scrollTo({
@@ -33,7 +36,9 @@ export function Characters(props) {
 
     return(
         <div className="content">
-            <ReadCharacter selectedCharacter={selectedCharacter} />
+            <ReadCharacter selectedCharacter={selectedCharacter} reloadCharacters={props.reloadCharacters}
+                resetActiveCharacter={resetActiveCharacter} setNotification={props.setNotification}
+            />
             <div className="list-of-items">
                 {error && <p>There is an issue, if the issue persists, the issue lays with the server.</p>}
                 {listCharacters}

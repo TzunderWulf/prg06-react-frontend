@@ -2,7 +2,6 @@ import { DeleteCharacter } from "./DeleteCharacter";
 import { EditCharacter } from "./EditCharacter";
 
 export function ReadCharacter(props) {
-
     // Make sure to double check if something is even selected
     if (props.selectedCharacter && isNaN(props.selectedCharacter)) {
         return(
@@ -13,8 +12,12 @@ export function ReadCharacter(props) {
                     <p>Residing region: {props.selectedCharacter.region}</p>
                 </div>
                 <div>
-                    <EditCharacter selectedCharacter={props.selectedCharacter} />
-                    <DeleteCharacter selectedCharacter={props.selectedCharacter} />
+                    <EditCharacter selectedCharacter={props.selectedCharacter} reloadCharacters={props.reloadCharacters} 
+                        resetActiveCharacter={props.resetActiveCharacter} setNotification={props.setNotification}
+                    />
+                    <DeleteCharacter selectedCharacter={props.selectedCharacter} reloadCharacters={props.reloadCharacters} 
+                        resetActiveCharacter={props.resetActiveCharacter} setNotification={props.setNotification}
+                    />
                 </div>
             </div>
         );
