@@ -68,6 +68,7 @@ export function CreateCharacter(props) {
             <button onClick={openModal} className="standard-button">Add character to archive</button>
                 {notifaction && <p className="notification">{notifaction}</p>}
             <Modal
+                className="modal-content"
                 isOpen={modalIsOpen} 
                 onRequestClose={closeModal} 
                 contentLabel="Add character to archive"
