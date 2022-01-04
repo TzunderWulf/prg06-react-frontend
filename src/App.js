@@ -1,12 +1,17 @@
-import { Characters } from "./Characters";
-import { CreateCharacter } from "./CreateCharacter";
+import { useState } from "react"
 
-export function App() {
-    return (
-        <div className="app">
-            <h1 className="title">The Genshin Impact Character Archive</h1>
-            <CreateCharacter />
+import { CreateCharacter } from './CreateCharacter';
+import { Characters } from "./Characters";
+
+export function App() 
+{
+    return(
+        <div>
+            <div className="top-bar">
+                <p>The Genshin Impact Character Archive</p>
+                <CreateCharacter />
+            </div>
             <Characters />
         </div>
-    );
+    )
 }

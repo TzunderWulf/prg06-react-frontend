@@ -8,10 +8,50 @@ pop ->  cedar che: #db504a
 
 * {
     font-family: 'Ubuntu Mono', monospace;
+    font-size: 30px;
 }
 
-.block-around {
+.top-bar {
+    margin-bottom: 10px;
+}
+
+.content {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 50% 50%;
+    padding: 10px;
+}
+
+.details-item {
+    height: fit-content;
+    -webkit-box-shadow: 0px 0px 15px 4px rgba(141,141,141,0.71); 
+    box-shadow: 0px 0px 15px 4px rgba(141,141,141,0.71);
+    margin: 20px 10px;
+    padding: 10px;
+}
+
+.list-of-items {
+    margin: 20px 10px;
+    padding: 10px;
+}
+
+.item {
     border: 2px solid black;
     padding: 10px;
-    margin: 10px;
+    margin: 10px 0;
+}
+
+.item:hover {
+    cursor: pointer;
+    background-color: lightgray;
+}
+
+.pagination-buttons {
+    width: fit-content;
+    margin: auto;
+}
+
+.standard-button {
+    margin: 5px;
+    padding: 5px;
 }

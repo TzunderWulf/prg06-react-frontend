@@ -1,3 +1,27 @@
-export function ReadCharacter() {
+import { DeleteCharacter } from "./DeleteCharacter";
+import { EditCharacter } from "./EditCharacter";
+
+export function ReadCharacter(props) {
+    if (props.selectedCharacter && isNaN(props.selectedCharacter)) {
+        return(
+            <div className="details-item">
+                <div>
+                    <h1>{props.selectedCharacter.name}</h1>
+                    <p>Wielding element: {props.selectedCharacter.element}</p>
+                    <p>Residing region: {props.selectedCharacter.region}</p>
+                </div>
+                <div>
+                    <EditCharacter selectedCharacter={props.selectedCharacter} />
+                    <DeleteCharacter selectedCharacter={props.selectedCharacter} />
+                </div>
+            </div>
+        );
+    } else {
+        return(
+            <div className="details-item">
+                <p>Please select an character to see it's details.</p>
+            </div>
+        )
+    }
 
 }

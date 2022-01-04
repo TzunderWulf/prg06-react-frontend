@@ -1,10 +1,16 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from 'react';
 
-export function Characters() 
-{
-    const [characters, setCharacters] = useState([]);
+import { ReadCharacter } from './ReadCharacter';
 
-    const loadInCharacters = () => {
+export function Characters() {
+    const [error, setError] = useState()
+    const [characters, setCharacters] = useState([])
+    const [selectedCharacter, setSelectedCharacter] = useState()
+    const [page, setPage] = useState(1)
+    const [totalItems, setTotalItems] = useState(0)
+
+
+    const loadCharacters = () => {
         fetch(`http://145.24.222.243:8080/characters`, {
             headers: {
                 "Accept": "application/json",
@@ -12,22 +18,30 @@ export function Characters()
         })
         .then(response => response.json())
         .then(data => setCharacters(data.items))
-        .catch(error => console.log(error))
+        .catch(error => setError(error))
     };
 
-    const listAllCharacters = characters.map((character) => {
-        return(
-            <div className="block-around" key={character._id}>
-                <h1>{character.name}</h1>
-            </div>
-        );
-    });
+    const loadActiveCharacter = (data) => {
+        setSelectedCharacter(data); 
+    };
 
-    useEffect(loadInCharacters, []);
+    const listCharacters = characters.map((character) => {
+        return(
+            <div key={character._id} onClick={() => loadActiveCharacter(character)} className="item">
+                {character.name}
+            </div>
+        )
+    })
+
+    useEffect(loadCharacters, [page]);
 
     return(
-        <div>
-            {listAllCharacters}
+        <div className="content">
+            <ReadCharacter selectedCharacter={selectedCharacter} />
+            <div className="list-of-items">
+                {error && <p>There is an issue, if the issue persists, the issue lays with the server.</p>}
+                {listCharacters}
+            </div>
         </div>
     );
 }
