@@ -2,6 +2,8 @@ import { DeleteCharacter } from "./DeleteCharacter";
 import { EditCharacter } from "./EditCharacter";
 
 export function ReadCharacter(props) {
+
+    // Make sure to double check if something is even selected
     if (props.selectedCharacter && isNaN(props.selectedCharacter)) {
         return(
             <div className="details-item">
@@ -21,7 +23,7 @@ export function ReadCharacter(props) {
             <div className="details-item">
                 <p>Please select an character to see it's details.</p>
             </div>
-        )
+        );
     }
 
 }

@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-import { CreateCharacter } from './CreateCharacter';
+import { CreateCharacter } from "./CreateCharacter";
 import { Characters } from "./Characters";
 
 export function App() 
@@ -8,7 +8,7 @@ export function App()
     return(
         <div>
             <div className="top-bar">
-                <p>The Genshin Impact Character Archive</p>
+                <h1>The Genshin Impact Character Archive</h1>
                 <CreateCharacter />
             </div>
             <Characters />

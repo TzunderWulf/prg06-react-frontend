@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import { ReadCharacter } from './ReadCharacter';
+import { ReadCharacter } from "./ReadCharacter";
 
 export function Characters() {
-    const [error, setError] = useState()
-    const [characters, setCharacters] = useState([])
-    const [selectedCharacter, setSelectedCharacter] = useState()
-    const [page, setPage] = useState(1)
-    const [totalItems, setTotalItems] = useState(0)
 
+    const [error, setError] = useState();
 
+    const [characters, setCharacters] = useState([]);
+    const [selectedCharacter, setSelectedCharacter] = useState();
+
+    // Fetch all characters from webservice
     const loadCharacters = () => {
         fetch(`http://145.24.222.243:8080/characters`, {
             headers: {
@@ -21,19 +21,30 @@ export function Characters() {
         .catch(error => setError(error))
     };
 
+    // Set the read to the clicked character
     const loadActiveCharacter = (data) => {
         setSelectedCharacter(data); 
     };
 
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }
+
     const listCharacters = characters.map((character) => {
         return(
-            <div key={character._id} onClick={() => loadActiveCharacter(character)} className="item">
-                {character.name}
+            <div 
+                key={character._id} 
+                onClick={() => { loadActiveCharacter(character); scrollToTop() }} 
+                className="item">
+                <p>{character.name}</p>
             </div>
         )
     })
 
-    useEffect(loadCharacters, [page]);
+    useEffect(loadCharacters, []);
 
     return(
         <div className="content">
