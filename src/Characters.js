@@ -2,24 +2,11 @@ import { useEffect, useState } from "react";
 
 import { ReadCharacter } from "./ReadCharacter";
 
-export function Characters() {
+export function Characters(props) {
 
     const [error, setError] = useState();
 
-    const [characters, setCharacters] = useState([]);
     const [selectedCharacter, setSelectedCharacter] = useState();
-
-    // Fetch all characters from webservice
-    const loadCharacters = () => {
-        fetch(`http://145.24.222.243:8080/characters`, {
-            headers: {
-                "Accept": "application/json",
-            }
-        })
-        .then(response => response.json())
-        .then(data => setCharacters(data.items))
-        .catch(error => setError(error))
-    };
 
     // Set the read to the clicked character
     const loadActiveCharacter = (data) => {
@@ -33,7 +20,7 @@ export function Characters() {
         });
     }
 
-    const listCharacters = characters.map((character) => {
+    const listCharacters = props.characters.map((character) => {
         return(
             <div 
                 key={character._id} 
@@ -43,8 +30,6 @@ export function Characters() {
             </div>
         )
     })
-
-    useEffect(loadCharacters, []);
 
     return(
         <div className="content">

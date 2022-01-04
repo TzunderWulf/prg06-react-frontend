@@ -17,6 +17,7 @@ export function CreateCharacter(props) {
     }
 
     const closeModal = () => {
+        inputs.name = inputs.element = inputs.region = "";
         setIsOpen(false);
     }
 
@@ -32,7 +33,27 @@ export function CreateCharacter(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        console.log(`Submitted: ${inputs.name}, ${inputs.element}, ${inputs.region}`)
+        if (inputs.name.trim() != "" && inputs.element.trim() != "" && inputs.region.trim() != "") {
+            console.log(inputs);
+            fetch(`http://145.24.222.243:8080/characters`, {
+                method: "post",
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    "name": inputs.name,
+                    "element": inputs.element,
+                    "region": inputs.region
+                })
+            })
+            .then(response => response.json())
+            .then((data) => {
+                props.reloadCharacters();
+                closeModal();
+            })
+            .catch(error => console.log(error))
+        }
     }
 
     return(
@@ -48,6 +69,7 @@ export function CreateCharacter(props) {
                     <div className="title">
                         <h1>Add character to the archive</h1>
                         <p className="error">No fields are allowed to be empty.</p>
+                        <p>If you close this menu, the values will be reset to be empty.</p>
                     </div>
                     <button className="close-button" onClick={closeModal}>X</button>
                 </div>
