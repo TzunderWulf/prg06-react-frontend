@@ -93,4 +93,10 @@ input {
     justify-content: space-between;
     margin: 10px 0;
 }
+
+.notification {
+    text-align: center;
+    font-size: 2em;
+    line-height: 0;
+}
 /*# sourceMappingURL=index.be5cf2f4.css.map */

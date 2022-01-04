@@ -22987,7 +22987,9 @@ function CreateCharacter(props) {
         element: "",
         region: ""
     });
+    const [notifaction, setNotifacation] = _react.useState(false);
     const openModal = ()=>{
+        setNotifacation(false);
         setIsOpen(true);
     };
     const closeModal = ()=>{
@@ -23017,9 +23019,12 @@ function CreateCharacter(props) {
                     "element": inputs.element,
                     "region": inputs.region
                 })
-            }).then((response)=>response.json()
-            ).then((data)=>{
-                props.reloadCharacters();
+            }).then((response)=>{
+                response.json();
+                if (response.status == 201) {
+                    props.reloadCharacters();
+                    setNotifacation(`Character created! 👍`);
+                } else setNotifacation(`Something went wrong, please try again. 😞`);
                 closeModal();
             }).catch((error)=>console.log(error)
             );
@@ -23028,7 +23033,7 @@ function CreateCharacter(props) {
     return(/*#__PURE__*/ _jsxRuntime.jsxs("div", {
         __source: {
             fileName: "src/CreateCharacter.js",
-            lineNumber: 60,
+            lineNumber: 67,
             columnNumber: 9
         },
         __self: this,
@@ -23038,11 +23043,21 @@ function CreateCharacter(props) {
                 className: "standard-button",
                 __source: {
                     fileName: "src/CreateCharacter.js",
-                    lineNumber: 61,
+                    lineNumber: 68,
                     columnNumber: 13
                 },
                 __self: this,
                 children: "Add character to archive"
+            }),
+            notifaction && /*#__PURE__*/ _jsxRuntime.jsx("p", {
+                className: "notification",
+                __source: {
+                    fileName: "src/CreateCharacter.js",
+                    lineNumber: 69,
+                    columnNumber: 33
+                },
+                __self: this,
+                children: notifaction
             }),
             /*#__PURE__*/ _jsxRuntime.jsxs(_reactModalDefault.default, {
                 isOpen: modalIsOpen,
@@ -23050,7 +23065,7 @@ function CreateCharacter(props) {
                 contentLabel: "Add character to archive",
                 __source: {
                     fileName: "src/CreateCharacter.js",
-                    lineNumber: 63,
+                    lineNumber: 70,
                     columnNumber: 13
                 },
                 __self: this,
@@ -23059,7 +23074,7 @@ function CreateCharacter(props) {
                         className: "top-bar-modal",
                         __source: {
                             fileName: "src/CreateCharacter.js",
-                            lineNumber: 68,
+                            lineNumber: 75,
                             columnNumber: 17
                         },
                         __self: this,
@@ -23068,7 +23083,7 @@ function CreateCharacter(props) {
                                 className: "title",
                                 __source: {
                                     fileName: "src/CreateCharacter.js",
-                                    lineNumber: 69,
+                                    lineNumber: 76,
                                     columnNumber: 21
                                 },
                                 __self: this,
@@ -23076,7 +23091,7 @@ function CreateCharacter(props) {
                                     /*#__PURE__*/ _jsxRuntime.jsx("h1", {
                                         __source: {
                                             fileName: "src/CreateCharacter.js",
-                                            lineNumber: 70,
+                                            lineNumber: 77,
                                             columnNumber: 25
                                         },
                                         __self: this,
@@ -23086,7 +23101,7 @@ function CreateCharacter(props) {
                                         className: "error",
                                         __source: {
                                             fileName: "src/CreateCharacter.js",
-                                            lineNumber: 71,
+                                            lineNumber: 78,
                                             columnNumber: 25
                                         },
                                         __self: this,
@@ -23095,7 +23110,7 @@ function CreateCharacter(props) {
                                     /*#__PURE__*/ _jsxRuntime.jsx("p", {
                                         __source: {
                                             fileName: "src/CreateCharacter.js",
-                                            lineNumber: 72,
+                                            lineNumber: 79,
                                             columnNumber: 25
                                         },
                                         __self: this,
@@ -23108,7 +23123,7 @@ function CreateCharacter(props) {
                                 onClick: closeModal,
                                 __source: {
                                     fileName: "src/CreateCharacter.js",
-                                    lineNumber: 74,
+                                    lineNumber: 81,
                                     columnNumber: 21
                                 },
                                 __self: this,
@@ -23119,14 +23134,14 @@ function CreateCharacter(props) {
                     /*#__PURE__*/ _jsxRuntime.jsx("div", {
                         __source: {
                             fileName: "src/CreateCharacter.js",
-                            lineNumber: 76,
+                            lineNumber: 83,
                             columnNumber: 17
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsxs("form", {
                             __source: {
                                 fileName: "src/CreateCharacter.js",
-                                lineNumber: 77,
+                                lineNumber: 84,
                                 columnNumber: 21
                             },
                             __self: this,
@@ -23135,7 +23150,7 @@ function CreateCharacter(props) {
                                     className: "input-field",
                                     __source: {
                                         fileName: "src/CreateCharacter.js",
-                                        lineNumber: 78,
+                                        lineNumber: 85,
                                         columnNumber: 25
                                     },
                                     __self: this,
@@ -23143,7 +23158,7 @@ function CreateCharacter(props) {
                                         /*#__PURE__*/ _jsxRuntime.jsx("label", {
                                             __source: {
                                                 fileName: "src/CreateCharacter.js",
-                                                lineNumber: 79,
+                                                lineNumber: 86,
                                                 columnNumber: 29
                                             },
                                             __self: this,
@@ -23156,7 +23171,7 @@ function CreateCharacter(props) {
                                             onChange: handleChange,
                                             __source: {
                                                 fileName: "src/CreateCharacter.js",
-                                                lineNumber: 80,
+                                                lineNumber: 87,
                                                 columnNumber: 29
                                             },
                                             __self: this
@@ -23167,7 +23182,7 @@ function CreateCharacter(props) {
                                     className: "input-field",
                                     __source: {
                                         fileName: "src/CreateCharacter.js",
-                                        lineNumber: 82,
+                                        lineNumber: 89,
                                         columnNumber: 25
                                     },
                                     __self: this,
@@ -23175,7 +23190,7 @@ function CreateCharacter(props) {
                                         /*#__PURE__*/ _jsxRuntime.jsx("label", {
                                             __source: {
                                                 fileName: "src/CreateCharacter.js",
-                                                lineNumber: 83,
+                                                lineNumber: 90,
                                                 columnNumber: 29
                                             },
                                             __self: this,
@@ -23188,7 +23203,7 @@ function CreateCharacter(props) {
                                             onChange: handleChange,
                                             __source: {
                                                 fileName: "src/CreateCharacter.js",
-                                                lineNumber: 84,
+                                                lineNumber: 91,
                                                 columnNumber: 29
                                             },
                                             __self: this
@@ -23199,7 +23214,7 @@ function CreateCharacter(props) {
                                     className: "input-field",
                                     __source: {
                                         fileName: "src/CreateCharacter.js",
-                                        lineNumber: 86,
+                                        lineNumber: 93,
                                         columnNumber: 25
                                     },
                                     __self: this,
@@ -23207,7 +23222,7 @@ function CreateCharacter(props) {
                                         /*#__PURE__*/ _jsxRuntime.jsx("label", {
                                             __source: {
                                                 fileName: "src/CreateCharacter.js",
-                                                lineNumber: 87,
+                                                lineNumber: 94,
                                                 columnNumber: 29
                                             },
                                             __self: this,
@@ -23220,7 +23235,7 @@ function CreateCharacter(props) {
                                             onChange: handleChange,
                                             __source: {
                                                 fileName: "src/CreateCharacter.js",
-                                                lineNumber: 88,
+                                                lineNumber: 95,
                                                 columnNumber: 29
                                             },
                                             __self: this
@@ -23234,7 +23249,7 @@ function CreateCharacter(props) {
                                     onClick: handleSubmit,
                                     __source: {
                                         fileName: "src/CreateCharacter.js",
-                                        lineNumber: 90,
+                                        lineNumber: 97,
                                         columnNumber: 25
                                     },
                                     __self: this
@@ -23247,7 +23262,7 @@ function CreateCharacter(props) {
         ]
     }));
 }
-_s(CreateCharacter, "hkD7r4dTrYsS/yxK0u9NBRcFpVc=");
+_s(CreateCharacter, "aZQfYvxEI0DbpEwqzB4WOlaaLmk=");
 _c = CreateCharacter;
 var _c;
 $RefreshReg$(_c, "CreateCharacter");

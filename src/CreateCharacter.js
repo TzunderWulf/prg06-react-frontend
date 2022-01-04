@@ -10,9 +10,11 @@ export function CreateCharacter(props) {
         name: "",
         element: "",
         region: ""
-    })
+    });
+    const [notifaction, setNotifacation] = useState(false);
 
     const openModal = () => {
+        setNotifacation(false)
         setIsOpen(true);
     }
 
@@ -47,9 +49,14 @@ export function CreateCharacter(props) {
                     "region": inputs.region
                 })
             })
-            .then(response => response.json())
-            .then((data) => {
-                props.reloadCharacters();
+            .then(response => {
+                response.json();
+                if (response.status == 201) {
+                    props.reloadCharacters();
+                    setNotifacation(`Character created! 👍`);
+                } else {
+                    setNotifacation(`Something went wrong, please try again. 😞`);
+                }
                 closeModal();
             })
             .catch(error => console.log(error))
@@ -59,7 +66,7 @@ export function CreateCharacter(props) {
     return(
         <div>
             <button onClick={openModal} className="standard-button">Add character to archive</button>
-
+                {notifaction && <p className="notification">{notifaction}</p>}
             <Modal
                 isOpen={modalIsOpen} 
                 onRequestClose={closeModal} 
