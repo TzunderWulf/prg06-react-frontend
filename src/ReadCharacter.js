@@ -8,6 +8,7 @@ export function ReadCharacter(props) {
             <div className="details-item">
                 <div>
                     <h1>{props.selectedCharacter.name}</h1>
+                    <i>ID: {props.selectedCharacter._id}</i>
                     <p>Wielding element: {props.selectedCharacter.element}</p>
                     <p>Residing region: {props.selectedCharacter.region}</p>
                 </div>

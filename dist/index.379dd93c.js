@@ -25584,10 +25584,22 @@ function ReadCharacter(props) {
                         __self: this,
                         children: props.selectedCharacter.name
                     }),
-                    /*#__PURE__*/ _jsxRuntime.jsxs("p", {
+                    /*#__PURE__*/ _jsxRuntime.jsxs("i", {
                         __source: {
                             fileName: "src/ReadCharacter.js",
                             lineNumber: 11,
+                            columnNumber: 21
+                        },
+                        __self: this,
+                        children: [
+                            "ID: ",
+                            props.selectedCharacter._id
+                        ]
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsxs("p", {
+                        __source: {
+                            fileName: "src/ReadCharacter.js",
+                            lineNumber: 12,
                             columnNumber: 21
                         },
                         __self: this,
@@ -25599,7 +25611,7 @@ function ReadCharacter(props) {
                     /*#__PURE__*/ _jsxRuntime.jsxs("p", {
                         __source: {
                             fileName: "src/ReadCharacter.js",
-                            lineNumber: 12,
+                            lineNumber: 13,
                             columnNumber: 21
                         },
                         __self: this,
@@ -25613,7 +25625,7 @@ function ReadCharacter(props) {
             /*#__PURE__*/ _jsxRuntime.jsxs("div", {
                 __source: {
                     fileName: "src/ReadCharacter.js",
-                    lineNumber: 14,
+                    lineNumber: 15,
                     columnNumber: 17
                 },
                 __self: this,
@@ -25625,7 +25637,7 @@ function ReadCharacter(props) {
                         setNotification: props.setNotification,
                         __source: {
                             fileName: "src/ReadCharacter.js",
-                            lineNumber: 15,
+                            lineNumber: 16,
                             columnNumber: 21
                         },
                         __self: this
@@ -25637,7 +25649,7 @@ function ReadCharacter(props) {
                         setNotification: props.setNotification,
                         __source: {
                             fileName: "src/ReadCharacter.js",
-                            lineNumber: 18,
+                            lineNumber: 19,
                             columnNumber: 21
                         },
                         __self: this
@@ -25645,7 +25657,7 @@ function ReadCharacter(props) {
                     /*#__PURE__*/ _jsxRuntime.jsx("i", {
                         __source: {
                             fileName: "src/ReadCharacter.js",
-                            lineNumber: 21,
+                            lineNumber: 22,
                             columnNumber: 21
                         },
                         __self: this,
@@ -25659,14 +25671,14 @@ function ReadCharacter(props) {
         className: "details-item",
         __source: {
             fileName: "src/ReadCharacter.js",
-            lineNumber: 27,
+            lineNumber: 28,
             columnNumber: 13
         },
         __self: this,
         children: /*#__PURE__*/ _jsxRuntime.jsx("p", {
             __source: {
                 fileName: "src/ReadCharacter.js",
-                lineNumber: 28,
+                lineNumber: 29,
                 columnNumber: 17
             },
             __self: this,
