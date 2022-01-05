@@ -147,4 +147,11 @@ input {
     overflow: auto;
     -webkit-overflow-scrolling: touch;
 }
+
+.pagination-buttons {
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    margin: auto;
+}
 /*# sourceMappingURL=index.be5cf2f4.css.map */

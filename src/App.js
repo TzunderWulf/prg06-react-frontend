@@ -34,11 +34,11 @@ export function App()
                 />
                 {notification && <p className="notification">{notification}</p>}
             </div>
-            <div>
-                <button onClick={() => setFetchURL(pagination.first.href)}>First page</button>
-                <button onClick={() => setFetchURL(pagination.last.href)}>Last page</button>
-                <button onClick={() => setFetchURL(pagination.previous.href)}>Previous page</button>
-                <button onClick={() => setFetchURL(pagination.next.href)}>Next page</button>
+            <div className="pagination-buttons">
+                <button className="standard-button" onClick={() => setFetchURL(pagination.first.href)}>First page</button>
+                <button className="standard-button" onClick={() => setFetchURL(pagination.previous.href)}>Previous page</button>
+                <button className="standard-button" onClick={() => setFetchURL(pagination.next.href)}>Next page</button>
+                <button className="standard-button" onClick={() => setFetchURL(pagination.last.href)}>Last page</button>
             </div>
             <Characters characters={characters} reloadCharacters={loadCharacters} setNotification={setNotification} 
                 currentURL={fetchURL}

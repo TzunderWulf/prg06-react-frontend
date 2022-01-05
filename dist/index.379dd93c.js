@@ -22810,6 +22810,7 @@ function App() {
                 ]
             }),
             /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                className: "pagination-buttons",
                 __source: {
                     fileName: "src/App.js",
                     lineNumber: 37,
@@ -22818,6 +22819,7 @@ function App() {
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx("button", {
+                        className: "standard-button",
                         onClick: ()=>setFetchURL(pagination.first.href)
                         ,
                         __source: {
@@ -22829,7 +22831,8 @@ function App() {
                         children: "First page"
                     }),
                     /*#__PURE__*/ _jsxRuntime.jsx("button", {
-                        onClick: ()=>setFetchURL(pagination.last.href)
+                        className: "standard-button",
+                        onClick: ()=>setFetchURL(pagination.previous.href)
                         ,
                         __source: {
                             fileName: "src/App.js",
@@ -22837,10 +22840,11 @@ function App() {
                             columnNumber: 17
                         },
                         __self: this,
-                        children: "Last page"
+                        children: "Previous page"
                     }),
                     /*#__PURE__*/ _jsxRuntime.jsx("button", {
-                        onClick: ()=>setFetchURL(pagination.previous.href)
+                        className: "standard-button",
+                        onClick: ()=>setFetchURL(pagination.next.href)
                         ,
                         __source: {
                             fileName: "src/App.js",
@@ -22848,10 +22852,11 @@ function App() {
                             columnNumber: 17
                         },
                         __self: this,
-                        children: "Previous page"
+                        children: "Next page"
                     }),
                     /*#__PURE__*/ _jsxRuntime.jsx("button", {
-                        onClick: ()=>setFetchURL(pagination.next.href)
+                        className: "standard-button",
+                        onClick: ()=>setFetchURL(pagination.last.href)
                         ,
                         __source: {
                             fileName: "src/App.js",
@@ -22859,7 +22864,7 @@ function App() {
                             columnNumber: 17
                         },
                         __self: this,
-                        children: "Next page"
+                        children: "Last page"
                     })
                 ]
             }),
