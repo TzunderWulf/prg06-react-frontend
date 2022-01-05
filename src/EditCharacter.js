@@ -54,7 +54,7 @@ export function EditCharacter(props) {
             .then(response => {
                 response.json();
                 if (response.status == 200) {
-                    props.reloadCharacters();
+                    props.reloadCharacters(props.currentURL);
                     props.loadCharacter(props.selectedCharacter._id);
                     props.setNotification(`Character edited! 👍`);
                 } else {

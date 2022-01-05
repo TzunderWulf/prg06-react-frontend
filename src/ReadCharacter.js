@@ -14,10 +14,10 @@ export function ReadCharacter(props) {
                 </div>
                 <div>
                     <EditCharacter selectedCharacter={props.selectedCharacter} reloadCharacters={props.reloadCharacters} 
-                        loadCharacter={props.loadCharacter} setNotification={props.setNotification}
+                        loadCharacter={props.loadCharacter} setNotification={props.setNotification} currentURL={props.currentURL}
                     />
                     <DeleteCharacter selectedCharacter={props.selectedCharacter} reloadCharacters={props.reloadCharacters} 
-                        resetActiveCharacter={props.resetActiveCharacter} setNotification={props.setNotification}
+                        resetActiveCharacter={props.resetActiveCharacter} setNotification={props.setNotification} currentURL={props.currentURL}
                     />
                     <i>IMMEDIATELY REMOVES CHARACTER</i>
                 </div>

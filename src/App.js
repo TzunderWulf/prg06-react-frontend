@@ -8,29 +8,41 @@ export function App()
 
     const [characters, setCharacters] = useState([]);
     const [notification, setNotification] = useState("");
+    const [fetchURL, setFetchURL] = useState("http://145.24.222.243:8080/characters?start=1&limit=5");
+    const [pagination, setPagination] = useState();
 
     // Fetch all characters from webservice
-    const loadCharacters = () => {
-        fetch(`http://145.24.222.243:8080/characters`, {
+    const loadCharacters = (link) => {
+        fetch(link, {
             headers: {
                 "Accept": "application/json",
             }
         })
         .then(response => response.json())
-        .then(data => setCharacters(data.items))
-        .catch(error => setError(error))
+        .then(data => {setCharacters(data.items); setPagination(data.pagination._links)})
+        .catch(error => console.log(error))
     };
 
-    useEffect(loadCharacters, []);
+    useEffect(() => loadCharacters(fetchURL), [fetchURL]);
 
     return(
         <div>
             <div className="top-bar">
                 <h1>The Genshin Impact Character Archive</h1>
-                <CreateCharacter reloadCharacters={loadCharacters} setNotification={setNotification} />
+                <CreateCharacter reloadCharacters={loadCharacters} setNotification={setNotification} 
+                    currentURL={fetchURL}
+                />
                 {notification && <p className="notification">{notification}</p>}
             </div>
-            <Characters characters={characters} reloadCharacters={loadCharacters} setNotification={setNotification} />
+            <div>
+                <button onClick={() => setFetchURL(pagination.first.href)}>First page</button>
+                <button onClick={() => setFetchURL(pagination.last.href)}>Last page</button>
+                <button onClick={() => setFetchURL(pagination.previous.href)}>Previous page</button>
+                <button onClick={() => setFetchURL(pagination.next.href)}>Next page</button>
+            </div>
+            <Characters characters={characters} reloadCharacters={loadCharacters} setNotification={setNotification} 
+                currentURL={fetchURL}
+            />
         </div>
     )
 }

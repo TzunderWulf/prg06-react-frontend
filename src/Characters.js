@@ -53,7 +53,7 @@ export function Characters(props) {
         <div className="content">
             <ReadCharacter selectedCharacter={selectedCharacter} reloadCharacters={props.reloadCharacters}
                 resetActiveCharacter={resetActiveCharacter} setNotification={props.setNotification}
-                loadCharacter={loadCharacter}
+                loadCharacter={loadCharacter} currentURL={props.currentURL}
             />
             <div className="list-of-items">
                 {error && <p>There is an issue, if the issue persists, the issue lays with the server.</p>}

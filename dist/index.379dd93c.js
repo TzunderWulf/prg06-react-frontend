@@ -22741,22 +22741,29 @@ function App() {
     _s();
     const [characters, setCharacters] = _react.useState([]);
     const [notification, setNotification] = _react.useState("");
+    const [fetchURL, setFetchURL] = _react.useState("http://145.24.222.243:8080/characters?start=1&limit=5");
+    const [pagination, setPagination] = _react.useState();
     // Fetch all characters from webservice
-    const loadCharacters = ()=>{
-        fetch(`http://145.24.222.243:8080/characters`, {
+    const loadCharacters = (link)=>{
+        fetch(link, {
             headers: {
                 "Accept": "application/json"
             }
         }).then((response)=>response.json()
-        ).then((data)=>setCharacters(data.items)
-        ).catch((error)=>setError(error)
+        ).then((data)=>{
+            setCharacters(data.items);
+            setPagination(data.pagination._links);
+        }).catch((error)=>console.log(error)
         );
     };
-    _react.useEffect(loadCharacters, []);
+    _react.useEffect(()=>loadCharacters(fetchURL)
+    , [
+        fetchURL
+    ]);
     return(/*#__PURE__*/ _jsxRuntime.jsxs("div", {
         __source: {
             fileName: "src/App.js",
-            lineNumber: 27,
+            lineNumber: 29,
             columnNumber: 9
         },
         __self: this,
@@ -22765,7 +22772,7 @@ function App() {
                 className: "top-bar",
                 __source: {
                     fileName: "src/App.js",
-                    lineNumber: 28,
+                    lineNumber: 30,
                     columnNumber: 13
                 },
                 __self: this,
@@ -22773,7 +22780,7 @@ function App() {
                     /*#__PURE__*/ _jsxRuntime.jsx("h1", {
                         __source: {
                             fileName: "src/App.js",
-                            lineNumber: 29,
+                            lineNumber: 31,
                             columnNumber: 17
                         },
                         __self: this,
@@ -22782,9 +22789,10 @@ function App() {
                     /*#__PURE__*/ _jsxRuntime.jsx(_createCharacter.CreateCharacter, {
                         reloadCharacters: loadCharacters,
                         setNotification: setNotification,
+                        currentURL: fetchURL,
                         __source: {
                             fileName: "src/App.js",
-                            lineNumber: 30,
+                            lineNumber: 32,
                             columnNumber: 17
                         },
                         __self: this
@@ -22793,7 +22801,7 @@ function App() {
                         className: "notification",
                         __source: {
                             fileName: "src/App.js",
-                            lineNumber: 31,
+                            lineNumber: 35,
                             columnNumber: 34
                         },
                         __self: this,
@@ -22801,13 +22809,68 @@ function App() {
                     })
                 ]
             }),
+            /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                __source: {
+                    fileName: "src/App.js",
+                    lineNumber: 37,
+                    columnNumber: 13
+                },
+                __self: this,
+                children: [
+                    /*#__PURE__*/ _jsxRuntime.jsx("button", {
+                        onClick: ()=>setFetchURL(pagination.first.href)
+                        ,
+                        __source: {
+                            fileName: "src/App.js",
+                            lineNumber: 38,
+                            columnNumber: 17
+                        },
+                        __self: this,
+                        children: "First page"
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx("button", {
+                        onClick: ()=>setFetchURL(pagination.last.href)
+                        ,
+                        __source: {
+                            fileName: "src/App.js",
+                            lineNumber: 39,
+                            columnNumber: 17
+                        },
+                        __self: this,
+                        children: "Last page"
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx("button", {
+                        onClick: ()=>setFetchURL(pagination.previous.href)
+                        ,
+                        __source: {
+                            fileName: "src/App.js",
+                            lineNumber: 40,
+                            columnNumber: 17
+                        },
+                        __self: this,
+                        children: "Previous page"
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx("button", {
+                        onClick: ()=>setFetchURL(pagination.next.href)
+                        ,
+                        __source: {
+                            fileName: "src/App.js",
+                            lineNumber: 41,
+                            columnNumber: 17
+                        },
+                        __self: this,
+                        children: "Next page"
+                    })
+                ]
+            }),
             /*#__PURE__*/ _jsxRuntime.jsx(_characters.Characters, {
                 characters: characters,
                 reloadCharacters: loadCharacters,
                 setNotification: setNotification,
+                currentURL: fetchURL,
                 __source: {
                     fileName: "src/App.js",
-                    lineNumber: 33,
+                    lineNumber: 43,
                     columnNumber: 13
                 },
                 __self: this
@@ -22815,7 +22878,7 @@ function App() {
         ]
     }));
 }
-_s(App, "D3gkDeQgqe+jrCm+lBMgqo8QIog=");
+_s(App, "Q7VRhh8c0hbqx5DR88HYOGsvMs0=");
 _c = App;
 var _c;
 $RefreshReg$(_c, "App");
@@ -23032,7 +23095,7 @@ function CreateCharacter(props) {
         }).then((response)=>{
             response.json();
             if (response.status == 201) {
-                props.reloadCharacters();
+                props.reloadCharacters(props.currentURL);
                 props.setNotification(`Character created! 👍`);
             } else props.setNotification(`Something went wrong, please try again. 😞`);
             closeModal();
@@ -25507,6 +25570,7 @@ function Characters(props) {
                 resetActiveCharacter: resetActiveCharacter,
                 setNotification: props.setNotification,
                 loadCharacter: loadCharacter,
+                currentURL: props.currentURL,
                 __source: {
                     fileName: "src/Characters.js",
                     lineNumber: 54,
@@ -25641,6 +25705,7 @@ function ReadCharacter(props) {
                         reloadCharacters: props.reloadCharacters,
                         loadCharacter: props.loadCharacter,
                         setNotification: props.setNotification,
+                        currentURL: props.currentURL,
                         __source: {
                             fileName: "src/ReadCharacter.js",
                             lineNumber: 16,
@@ -25653,6 +25718,7 @@ function ReadCharacter(props) {
                         reloadCharacters: props.reloadCharacters,
                         resetActiveCharacter: props.resetActiveCharacter,
                         setNotification: props.setNotification,
+                        currentURL: props.currentURL,
                         __source: {
                             fileName: "src/ReadCharacter.js",
                             lineNumber: 19,
@@ -25724,7 +25790,7 @@ function DeleteCharacter(props) {
         }).then((response)=>{
             response.json();
             if (response.status == 204) {
-                props.reloadCharacters();
+                props.reloadCharacters(props.currentURL);
                 props.resetActiveCharacter();
                 props.setNotification(`Character snapped from existence! 👍`);
             } else props.setNotification(`Something went wrong, please try again. 😞`);
@@ -25825,7 +25891,7 @@ function EditCharacter(props) {
         }).then((response)=>{
             response.json();
             if (response.status == 200) {
-                props.reloadCharacters();
+                props.reloadCharacters(props.currentURL);
                 props.loadCharacter(props.selectedCharacter._id);
                 props.setNotification(`Character edited! 👍`);
             } else props.setNotification(`Something went wrong, please try again. 😞`);

@@ -11,7 +11,7 @@ export function DeleteCharacter(props) {
         .then(response => {
             response.json();
             if (response.status == 204) {
-                props.reloadCharacters();
+                props.reloadCharacters(props.currentURL);
                 props.resetActiveCharacter();
                 props.setNotification(`Character snapped from existence! 👍`);
             } else {

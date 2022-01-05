@@ -50,7 +50,7 @@ export function CreateCharacter(props) {
             .then(response => {
                 response.json();
                 if (response.status == 201) {
-                    props.reloadCharacters();
+                    props.reloadCharacters(props.currentURL);
                     props.setNotification(`Character created! 👍`);
                 } else {
                     props.setNotification(`Something went wrong, please try again. 😞`);
