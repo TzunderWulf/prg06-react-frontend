@@ -8,8 +8,15 @@ export function Characters(props) {
     const [selectedCharacter, setSelectedCharacter] = useState();
 
     // Set the read to the clicked character
-    const loadActiveCharacter = (data) => {
-        setSelectedCharacter(data); 
+    const loadCharacter= (id) => {
+        fetch(`http://145.24.222.243:8080/characters/${id}`, {
+            headers: {
+                "Accept": "application/json",
+            }
+        })
+        .then(response => response.json())
+        .then(data => setSelectedCharacter(data))
+        .catch(error => console.log(error))
     };
 
     const resetActiveCharacter = () => {
@@ -27,7 +34,7 @@ export function Characters(props) {
         return(
             <div 
                 key={character._id} 
-                onClick={() => { loadActiveCharacter(character); scrollToTop() }} 
+                onClick={() => { loadCharacter(character._id); scrollToTop() }} 
                 className="item">
                 <p>{character.name}</p>
             </div>
@@ -38,6 +45,7 @@ export function Characters(props) {
         <div className="content">
             <ReadCharacter selectedCharacter={selectedCharacter} reloadCharacters={props.reloadCharacters}
                 resetActiveCharacter={resetActiveCharacter} setNotification={props.setNotification}
+                loadCharacter={loadCharacter}
             />
             <div className="list-of-items">
                 {error && <p>There is an issue, if the issue persists, the issue lays with the server.</p>}

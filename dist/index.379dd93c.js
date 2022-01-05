@@ -25440,11 +25440,18 @@ var _readCharacter = require("./ReadCharacter");
 var _s = $RefreshSig$();
 function Characters(props) {
     _s();
-    const [error, setError] = _react.useState();
+    const [error1, setError] = _react.useState();
     const [selectedCharacter, setSelectedCharacter] = _react.useState();
     // Set the read to the clicked character
-    const loadActiveCharacter = (data)=>{
-        setSelectedCharacter(data);
+    const loadCharacter = (id)=>{
+        fetch(`http://145.24.222.243:8080/characters/${id}`, {
+            headers: {
+                "Accept": "application/json"
+            }
+        }).then((response)=>response.json()
+        ).then((data)=>setSelectedCharacter(data)
+        ).catch((error)=>console.log(error)
+        );
     };
     const resetActiveCharacter = ()=>{
         setSelectedCharacter();
@@ -25458,20 +25465,20 @@ function Characters(props) {
     const listCharacters = props.characters.map((character)=>{
         return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
             onClick: ()=>{
-                loadActiveCharacter(character);
+                loadCharacter(character._id);
                 scrollToTop();
             },
             className: "item",
             __source: {
                 fileName: "src/Characters.js",
-                lineNumber: 28,
+                lineNumber: 35,
                 columnNumber: 13
             },
             __self: this,
             children: /*#__PURE__*/ _jsxRuntime.jsx("p", {
                 __source: {
                     fileName: "src/Characters.js",
-                    lineNumber: 32,
+                    lineNumber: 39,
                     columnNumber: 17
                 },
                 __self: this,
@@ -25483,7 +25490,7 @@ function Characters(props) {
         className: "content",
         __source: {
             fileName: "src/Characters.js",
-            lineNumber: 38,
+            lineNumber: 45,
             columnNumber: 9
         },
         __self: this,
@@ -25493,9 +25500,10 @@ function Characters(props) {
                 reloadCharacters: props.reloadCharacters,
                 resetActiveCharacter: resetActiveCharacter,
                 setNotification: props.setNotification,
+                loadCharacter: loadCharacter,
                 __source: {
                     fileName: "src/Characters.js",
-                    lineNumber: 39,
+                    lineNumber: 46,
                     columnNumber: 13
                 },
                 __self: this
@@ -25504,15 +25512,15 @@ function Characters(props) {
                 className: "list-of-items",
                 __source: {
                     fileName: "src/Characters.js",
-                    lineNumber: 42,
+                    lineNumber: 50,
                     columnNumber: 13
                 },
                 __self: this,
                 children: [
-                    error && /*#__PURE__*/ _jsxRuntime.jsx("p", {
+                    error1 && /*#__PURE__*/ _jsxRuntime.jsx("p", {
                         __source: {
                             fileName: "src/Characters.js",
-                            lineNumber: 43,
+                            lineNumber: 51,
                             columnNumber: 27
                         },
                         __self: this,
@@ -25613,7 +25621,7 @@ function ReadCharacter(props) {
                     /*#__PURE__*/ _jsxRuntime.jsx(_editCharacter.EditCharacter, {
                         selectedCharacter: props.selectedCharacter,
                         reloadCharacters: props.reloadCharacters,
-                        resetActiveCharacter: props.resetActiveCharacter,
+                        loadCharacter: props.loadCharacter,
                         setNotification: props.setNotification,
                         __source: {
                             fileName: "src/ReadCharacter.js",
@@ -25633,6 +25641,15 @@ function ReadCharacter(props) {
                             columnNumber: 21
                         },
                         __self: this
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx("i", {
+                        __source: {
+                            fileName: "src/ReadCharacter.js",
+                            lineNumber: 21,
+                            columnNumber: 21
+                        },
+                        __self: this,
+                        children: "IMMEDIATELY REMOVES CHARACTER"
                     })
                 ]
             })
@@ -25642,14 +25659,14 @@ function ReadCharacter(props) {
         className: "details-item",
         __source: {
             fileName: "src/ReadCharacter.js",
-            lineNumber: 26,
+            lineNumber: 27,
             columnNumber: 13
         },
         __self: this,
         children: /*#__PURE__*/ _jsxRuntime.jsx("p", {
             __source: {
                 fileName: "src/ReadCharacter.js",
-                lineNumber: 27,
+                lineNumber: 28,
                 columnNumber: 17
             },
             __self: this,
@@ -25741,21 +25758,293 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "EditCharacter", ()=>EditCharacter
 );
 var _jsxRuntime = require("react/jsx-runtime");
+var _reactModal = require("react-modal");
+var _reactModalDefault = parcelHelpers.interopDefault(_reactModal);
+var _react = require("react");
+var _s = $RefreshSig$();
+_reactModalDefault.default.setAppElement("#app");
 function EditCharacter(props) {
-    return(/*#__PURE__*/ _jsxRuntime.jsxs("button", {
-        className: "standard-button",
+    _s();
+    const [modalIsOpen, setIsOpen] = _react.useState(false);
+    const [inputs, setInputs] = _react.useState({
+        name: "",
+        element: "",
+        region: ""
+    });
+    const openModal = ()=>{
+        props.setNotification("");
+        setInputs({
+            name: props.selectedCharacter.name,
+            element: props.selectedCharacter.element,
+            region: props.selectedCharacter.region
+        });
+        setIsOpen(true);
+    };
+    const closeModal = ()=>{
+        setIsOpen(false);
+    };
+    // Function to handle changes in any inputs
+    const handleChange = (e)=>{
+        const value = e.target.value;
+        setInputs({
+            ...inputs,
+            [e.target.name]: value
+        });
+    };
+    const handleSubmit = (e)=>{
+        e.preventDefault();
+        if (inputs.name.trim() != "" && inputs.element.trim() != "" && inputs.region.trim() != "") fetch(`http://145.24.222.243:8080/characters/${props.selectedCharacter._id}`, {
+            method: "put",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "name": inputs.name,
+                "element": inputs.element,
+                "region": inputs.region
+            })
+        }).then((response)=>{
+            response.json();
+            if (response.status == 200) {
+                props.reloadCharacters();
+                props.loadCharacter(props.selectedCharacter._id);
+                props.setNotification(`Character edited! 👍`);
+            } else props.setNotification(`Something went wrong, please try again. 😞`);
+            closeModal();
+        }).catch((error)=>console.log(error)
+        );
+    };
+    return(/*#__PURE__*/ _jsxRuntime.jsxs("div", {
         __source: {
             fileName: "src/EditCharacter.js",
-            lineNumber: 3,
+            lineNumber: 70,
             columnNumber: 9
         },
         __self: this,
         children: [
-            "Edit ",
-            props.selectedCharacter.name
+            /*#__PURE__*/ _jsxRuntime.jsxs("button", {
+                onClick: openModal,
+                className: "standard-button",
+                __source: {
+                    fileName: "src/EditCharacter.js",
+                    lineNumber: 71,
+                    columnNumber: 13
+                },
+                __self: this,
+                children: [
+                    "Edit ",
+                    props.selectedCharacter.name
+                ]
+            }),
+            /*#__PURE__*/ _jsxRuntime.jsxs(_reactModalDefault.default, {
+                className: "modal-content",
+                isOpen: modalIsOpen,
+                onRequestClose: closeModal,
+                contentLabel: "Add character to archive",
+                __source: {
+                    fileName: "src/EditCharacter.js",
+                    lineNumber: 72,
+                    columnNumber: 13
+                },
+                __self: this,
+                children: [
+                    /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                        className: "top-bar-modal",
+                        __source: {
+                            fileName: "src/EditCharacter.js",
+                            lineNumber: 78,
+                            columnNumber: 17
+                        },
+                        __self: this,
+                        children: [
+                            /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                                className: "title",
+                                __source: {
+                                    fileName: "src/EditCharacter.js",
+                                    lineNumber: 79,
+                                    columnNumber: 21
+                                },
+                                __self: this,
+                                children: [
+                                    /*#__PURE__*/ _jsxRuntime.jsxs("h1", {
+                                        __source: {
+                                            fileName: "src/EditCharacter.js",
+                                            lineNumber: 80,
+                                            columnNumber: 25
+                                        },
+                                        __self: this,
+                                        children: [
+                                            "Edit ",
+                                            props.selectedCharacter.name
+                                        ]
+                                    }),
+                                    /*#__PURE__*/ _jsxRuntime.jsx("p", {
+                                        className: "error",
+                                        __source: {
+                                            fileName: "src/EditCharacter.js",
+                                            lineNumber: 81,
+                                            columnNumber: 25
+                                        },
+                                        __self: this,
+                                        children: "No fields are allowed to be empty."
+                                    }),
+                                    /*#__PURE__*/ _jsxRuntime.jsx("p", {
+                                        __source: {
+                                            fileName: "src/EditCharacter.js",
+                                            lineNumber: 82,
+                                            columnNumber: 25
+                                        },
+                                        __self: this,
+                                        children: "If you close this menu, the values will be reset."
+                                    })
+                                ]
+                            }),
+                            /*#__PURE__*/ _jsxRuntime.jsx("button", {
+                                className: "close-button",
+                                onClick: closeModal,
+                                __source: {
+                                    fileName: "src/EditCharacter.js",
+                                    lineNumber: 84,
+                                    columnNumber: 21
+                                },
+                                __self: this,
+                                children: "X"
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                        __source: {
+                            fileName: "src/EditCharacter.js",
+                            lineNumber: 86,
+                            columnNumber: 17
+                        },
+                        __self: this,
+                        children: /*#__PURE__*/ _jsxRuntime.jsxs("form", {
+                            __source: {
+                                fileName: "src/EditCharacter.js",
+                                lineNumber: 87,
+                                columnNumber: 21
+                            },
+                            __self: this,
+                            children: [
+                                /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                                    className: "input-field",
+                                    __source: {
+                                        fileName: "src/EditCharacter.js",
+                                        lineNumber: 88,
+                                        columnNumber: 25
+                                    },
+                                    __self: this,
+                                    children: [
+                                        /*#__PURE__*/ _jsxRuntime.jsx("label", {
+                                            __source: {
+                                                fileName: "src/EditCharacter.js",
+                                                lineNumber: 89,
+                                                columnNumber: 29
+                                            },
+                                            __self: this,
+                                            children: "Full name"
+                                        }),
+                                        /*#__PURE__*/ _jsxRuntime.jsx("input", {
+                                            type: "text",
+                                            name: "name",
+                                            value: inputs.name,
+                                            onChange: handleChange,
+                                            __source: {
+                                                fileName: "src/EditCharacter.js",
+                                                lineNumber: 90,
+                                                columnNumber: 29
+                                            },
+                                            __self: this
+                                        })
+                                    ]
+                                }),
+                                /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                                    className: "input-field",
+                                    __source: {
+                                        fileName: "src/EditCharacter.js",
+                                        lineNumber: 92,
+                                        columnNumber: 25
+                                    },
+                                    __self: this,
+                                    children: [
+                                        /*#__PURE__*/ _jsxRuntime.jsx("label", {
+                                            __source: {
+                                                fileName: "src/EditCharacter.js",
+                                                lineNumber: 93,
+                                                columnNumber: 29
+                                            },
+                                            __self: this,
+                                            children: "Wielding element"
+                                        }),
+                                        /*#__PURE__*/ _jsxRuntime.jsx("input", {
+                                            type: "text",
+                                            name: "element",
+                                            value: inputs.element,
+                                            onChange: handleChange,
+                                            __source: {
+                                                fileName: "src/EditCharacter.js",
+                                                lineNumber: 94,
+                                                columnNumber: 29
+                                            },
+                                            __self: this
+                                        })
+                                    ]
+                                }),
+                                /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                                    className: "input-field",
+                                    __source: {
+                                        fileName: "src/EditCharacter.js",
+                                        lineNumber: 96,
+                                        columnNumber: 25
+                                    },
+                                    __self: this,
+                                    children: [
+                                        /*#__PURE__*/ _jsxRuntime.jsx("label", {
+                                            __source: {
+                                                fileName: "src/EditCharacter.js",
+                                                lineNumber: 97,
+                                                columnNumber: 29
+                                            },
+                                            __self: this,
+                                            children: "Residing region"
+                                        }),
+                                        /*#__PURE__*/ _jsxRuntime.jsx("input", {
+                                            type: "text",
+                                            name: "region",
+                                            value: inputs.region,
+                                            onChange: handleChange,
+                                            __source: {
+                                                fileName: "src/EditCharacter.js",
+                                                lineNumber: 98,
+                                                columnNumber: 29
+                                            },
+                                            __self: this
+                                        })
+                                    ]
+                                }),
+                                /*#__PURE__*/ _jsxRuntime.jsx("input", {
+                                    className: "confirm-button",
+                                    type: "submit",
+                                    value: "Edit character",
+                                    onClick: handleSubmit,
+                                    __source: {
+                                        fileName: "src/EditCharacter.js",
+                                        lineNumber: 100,
+                                        columnNumber: 25
+                                    },
+                                    __self: this
+                                })
+                            ]
+                        })
+                    })
+                ]
+            })
         ]
     }));
 }
+_s(EditCharacter, "hkD7r4dTrYsS/yxK0u9NBRcFpVc=");
 _c = EditCharacter;
 var _c;
 $RefreshReg$(_c, "EditCharacter");
@@ -25765,6 +26054,6 @@ $RefreshReg$(_c, "EditCharacter");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"6Ds2u","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9pz13"}]},["emU3S","lBB98","hD4hw"], "hD4hw", "parcelRequire8b2a")
+},{"react/jsx-runtime":"6Ds2u","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9pz13","react-modal":"7EW7w","react":"4mchR"}]},["emU3S","lBB98","hD4hw"], "hD4hw", "parcelRequire8b2a")
 
 //# sourceMappingURL=index.379dd93c.js.map
