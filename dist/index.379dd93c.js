@@ -25442,6 +25442,7 @@ function Characters(props) {
     _s();
     const [error1, setError] = _react.useState();
     const [selectedCharacter, setSelectedCharacter] = _react.useState();
+    let idFromURL = window.location.pathname.replace('/', '');
     // Set the read to the clicked character
     const loadCharacter = (id)=>{
         fetch(`http://145.24.222.243:8080/characters/${id}`, {
@@ -25471,14 +25472,14 @@ function Characters(props) {
             className: "item",
             __source: {
                 fileName: "src/Characters.js",
-                lineNumber: 35,
+                lineNumber: 37,
                 columnNumber: 13
             },
             __self: this,
             children: /*#__PURE__*/ _jsxRuntime.jsx("p", {
                 __source: {
                     fileName: "src/Characters.js",
-                    lineNumber: 39,
+                    lineNumber: 41,
                     columnNumber: 17
                 },
                 __self: this,
@@ -25486,11 +25487,16 @@ function Characters(props) {
             })
         }, character._id));
     });
+    _react.useEffect(()=>{
+        if (idFromURL) loadCharacter(idFromURL);
+    }, [
+        idFromURL
+    ]);
     return(/*#__PURE__*/ _jsxRuntime.jsxs("div", {
         className: "content",
         __source: {
             fileName: "src/Characters.js",
-            lineNumber: 45,
+            lineNumber: 53,
             columnNumber: 9
         },
         __self: this,
@@ -25503,7 +25509,7 @@ function Characters(props) {
                 loadCharacter: loadCharacter,
                 __source: {
                     fileName: "src/Characters.js",
-                    lineNumber: 46,
+                    lineNumber: 54,
                     columnNumber: 13
                 },
                 __self: this
@@ -25512,7 +25518,7 @@ function Characters(props) {
                 className: "list-of-items",
                 __source: {
                     fileName: "src/Characters.js",
-                    lineNumber: 50,
+                    lineNumber: 58,
                     columnNumber: 13
                 },
                 __self: this,
@@ -25520,7 +25526,7 @@ function Characters(props) {
                     error1 && /*#__PURE__*/ _jsxRuntime.jsx("p", {
                         __source: {
                             fileName: "src/Characters.js",
-                            lineNumber: 51,
+                            lineNumber: 59,
                             columnNumber: 27
                         },
                         __self: this,
@@ -25532,7 +25538,7 @@ function Characters(props) {
         ]
     }));
 }
-_s(Characters, "F+PPxOJ7Mpk0OWd4peg7nWnBB4I=");
+_s(Characters, "AL7zfDQgvS5es8WanfaRmeDn8g0=");
 _c = Characters;
 var _c;
 $RefreshReg$(_c, "Characters");

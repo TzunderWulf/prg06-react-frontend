@@ -7,6 +7,8 @@ export function Characters(props) {
 
     const [selectedCharacter, setSelectedCharacter] = useState();
 
+    let idFromURL = window.location.pathname.replace('/', '');
+
     // Set the read to the clicked character
     const loadCharacter= (id) => {
         fetch(`http://145.24.222.243:8080/characters/${id}`, {
@@ -40,6 +42,12 @@ export function Characters(props) {
             </div>
         )
     })
+
+    useEffect(() => {
+        if (idFromURL) {
+            loadCharacter(idFromURL)
+        }
+    }, [idFromURL])
 
     return(
         <div className="content">
