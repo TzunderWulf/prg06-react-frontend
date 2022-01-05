@@ -28,7 +28,7 @@ export function App()
     return(
         <div>
             <div className="top-bar">
-                <h1>The Genshin Impact Character Archive</h1>
+                <h1 className="website-title">The Genshin Impact Character Archive</h1>
                 <CreateCharacter reloadCharacters={loadCharacters} setNotification={setNotification} 
                     currentURL={fetchURL}
                 />

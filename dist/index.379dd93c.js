@@ -22778,6 +22778,7 @@ function App() {
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx("h1", {
+                        className: "website-title",
                         __source: {
                             fileName: "src/App.js",
                             lineNumber: 31,

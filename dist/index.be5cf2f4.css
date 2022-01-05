@@ -11,12 +11,14 @@ html {
     background-color: lightslategray;
     padding: 0;
     margin: 0;
+    height: 100%;
 }
 
 body {
     background-color: white;
     margin: 0 auto;
     width: 70%;
+    height: 100%;
     padding: 20px;
 }
 
@@ -153,5 +155,10 @@ input {
     justify-content: center;
     width: 50%;
     margin: auto;
+}
+
+.website-title {
+    font-size: 3em;
+    text-align: center;
 }
 /*# sourceMappingURL=index.be5cf2f4.css.map */
