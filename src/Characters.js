@@ -25,18 +25,11 @@ export function Characters(props) {
         setSelectedCharacter(); 
     }
 
-    const scrollToTop = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-    }
-
     const listCharacters = props.characters.map((character) => {
         return(
             <div 
                 key={character._id} 
-                onClick={() => { loadCharacter(character._id); scrollToTop() }} 
+                onClick={() => { loadCharacter(character._id) }} 
                 className="item">
                 <p>{character.name}</p>
             </div>
