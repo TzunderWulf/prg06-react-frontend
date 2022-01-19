@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/TzunderWulf/prg06-react-frontend#readme",
   "dependencies": {
+    "follow-redirects": "^1.14.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-modal": "^3.14.4"
