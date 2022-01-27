@@ -25526,29 +25526,22 @@ function Characters(props) {
     const resetActiveCharacter = ()=>{
         setSelectedCharacter();
     };
-    const scrollToTop = ()=>{
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-    };
     const listCharacters = props.characters.map((character)=>{
         return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
             onClick: ()=>{
                 loadCharacter(character._id);
-                scrollToTop();
             },
             className: "item",
             __source: {
                 fileName: "src/Characters.js",
-                lineNumber: 37,
+                lineNumber: 30,
                 columnNumber: 13
             },
             __self: this,
             children: /*#__PURE__*/ _jsxRuntime.jsx("p", {
                 __source: {
                     fileName: "src/Characters.js",
-                    lineNumber: 41,
+                    lineNumber: 34,
                     columnNumber: 17
                 },
                 __self: this,
@@ -25565,7 +25558,7 @@ function Characters(props) {
         className: "content",
         __source: {
             fileName: "src/Characters.js",
-            lineNumber: 53,
+            lineNumber: 46,
             columnNumber: 9
         },
         __self: this,
@@ -25579,7 +25572,7 @@ function Characters(props) {
                 currentURL: props.currentURL,
                 __source: {
                     fileName: "src/Characters.js",
-                    lineNumber: 54,
+                    lineNumber: 47,
                     columnNumber: 13
                 },
                 __self: this
@@ -25588,7 +25581,7 @@ function Characters(props) {
                 className: "list-of-items",
                 __source: {
                     fileName: "src/Characters.js",
-                    lineNumber: 58,
+                    lineNumber: 51,
                     columnNumber: 13
                 },
                 __self: this,
@@ -25596,7 +25589,7 @@ function Characters(props) {
                     error1 && /*#__PURE__*/ _jsxRuntime.jsx("p", {
                         __source: {
                             fileName: "src/Characters.js",
-                            lineNumber: 59,
+                            lineNumber: 52,
                             columnNumber: 27
                         },
                         __self: this,
@@ -25836,7 +25829,7 @@ $RefreshReg$(_c, "DeleteCharacter");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"6Ds2u","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9pz13","react":"4mchR"}],"7e0tl":[function(require,module,exports) {
+},{"react/jsx-runtime":"6Ds2u","react":"4mchR","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9pz13"}],"7e0tl":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$c91d = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -26144,6 +26137,6 @@ $RefreshReg$(_c, "EditCharacter");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"6Ds2u","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9pz13","react-modal":"7EW7w","react":"4mchR"}]},["emU3S","lBB98","hD4hw"], "hD4hw", "parcelRequire8b2a")
+},{"react/jsx-runtime":"6Ds2u","react-modal":"7EW7w","react":"4mchR","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9pz13"}]},["emU3S","lBB98","hD4hw"], "hD4hw", "parcelRequire8b2a")
 
 //# sourceMappingURL=index.379dd93c.js.map
